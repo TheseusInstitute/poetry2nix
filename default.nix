@@ -286,7 +286,7 @@ lib.makeScope pkgs.newScope (self: {
     in
     {
       python = py;
-      poetryPackages = storePackages
+      poetryPackages = (lib.unique (storePackages ++ (lib.lists.concatLists (lib.attrValues inputAttrs))))
         ++ lib.optional hasScripts scriptsPackage
         ++ lib.optional hasEditable editablePackage;
       inherit poetryLock;
